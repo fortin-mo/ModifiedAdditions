@@ -10,13 +10,13 @@ import com.chrismin13.additionsapi.items.textured.CustomTexturedTool;
 
 public class AverageTexturedTool extends CustomTexturedTool
 {
-    public AverageTexturedTool(DamageableItem damageableItem, int n, Material material, Material material2, String s, String s2, String s3) {
-        this(damageableItem, n, s, s2, s3);
+    public AverageTexturedTool(DamageableItem damageableItem, int fakeDurability, Material material, Material material2, String idName, String displayName, String defaultTexture) {
+        this(damageableItem, fakeDurability, idName, displayName, defaultTexture);
         this.addAllCustomRecipes(this.getToolType().getCustomShapedRecipe(material, material2));
     }
     
-    public AverageTexturedTool(DamageableItem damageableItem, int fakeDurability, String s, String displayName, String s2) {
-        super(damageableItem, s, s2);
+    public AverageTexturedTool(DamageableItem damageableItem, int fakeDurability, String idName, String displayName, String defaultTexture) {
+        super(damageableItem, idName, defaultTexture);
         this.setDisplayName(displayName);
         this.setUnbreakable(true);
         this.setFakeDurability(fakeDurability);

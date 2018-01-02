@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.5.30
-// 
-
 package com.modified.modifiedadditions;
 
 import com.modified.modifiedadditions.items.EnderBow;
@@ -15,9 +11,7 @@ import com.modified.modifiedadditions.items.coal.CoalArmor;
 import com.modified.modifiedadditions.items.coal.CoalAxe;
 import com.modified.modifiedadditions.items.coal.CoalPickaxe;
 import com.modified.modifiedadditions.items.coal.CoalShovel;
-import com.modified.modifiedadditions.items.emerald.EmeraldArmor;
-import com.modified.modifiedadditions.items.emerald.EmeraldAxe;
-import com.modified.modifiedadditions.items.emerald.EmeraldShovel;
+import com.modified.modifiedadditions.items.emerald.*;
 import com.modified.modifiedadditions.items.endstone.EndStoneArmor;
 import com.modified.modifiedadditions.items.endstone.EndStoneAxe;
 import com.modified.modifiedadditions.items.endstone.EndStonePickaxe;
@@ -59,7 +53,6 @@ import com.modified.modifiedadditions.items.redstone.RedstoneArmor;
 import com.modified.modifiedadditions.items.lapis.LapisArmor;
 import com.modified.modifiedadditions.items.netherrack.NetherrackArmor;
 import com.chrismin13.additionsapi.enums.ArmorType;
-import com.chrismin13.additionsapi.items.CustomItem;
 import com.modified.modifiedadditions.items.chisels.DiamondChisel;
 import com.modified.modifiedadditions.items.chisels.GoldChisel;
 import com.modified.modifiedadditions.items.chisels.IronChisel;
@@ -120,9 +113,6 @@ import com.modified.modifiedadditions.items.obsidian.ObsidianSword;
 import com.modified.modifiedadditions.items.chisels.EmeraldChisel;
 import com.modified.modifiedadditions.items.sickles.EmeraldSickle;
 import com.modified.modifiedadditions.items.doubleaxes.EmeraldDoubleAxe;
-import com.modified.modifiedadditions.items.emerald.EmeraldHoe;
-import com.modified.modifiedadditions.items.emerald.EmeraldPickaxe;
-import com.modified.modifiedadditions.items.emerald.EmeraldSword;
 import com.modified.modifiedadditions.items.AverageTexturedTool;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.inventory.Recipe;
@@ -142,49 +132,61 @@ public class Items implements Listener
         additionsAPIInitializationEvent.addResourcePackFromPlugin(ModifiedAdditions.getInstance(), "ModifiedAdditions-1.1.zip");
         Items.config = ModifiedAdditions.getInstance().getConfig();
         String version = Bukkit.getServer().getVersion();
+
         if (version.contains("1.9") || version.contains("1.10") || version.contains("1.11")) {
+
             List<Material> list = Arrays.asList(Material.WOOD_SWORD, Material.WOOD_AXE, Material.WOOD_PICKAXE, Material.WOOD_SPADE, Material.WOOD_HOE);
             Iterator recipeIterator = Bukkit.recipeIterator();
-            while (recipeIterator.hasNext()) {
-                if (list.contains(((ShapedRecipe) recipeIterator.next()).getResult().getType())) {
+
+            while (recipeIterator.hasNext())
+                if (list.contains(((ShapedRecipe) recipeIterator.next()).getResult().getType()))
                     recipeIterator.remove();
-                }
-            }
-        }
-        else {
+
+        } else {
             Bukkit.getPluginManager().registerEvents((Listener)new CraftingRemover(), (Plugin) ModifiedAdditions.getInstance());
         }
+
         Iterator<AverageTexturedTool> iterator = Arrays.asList(new EmeraldSword(), new EmeraldAxe(), new EmeraldPickaxe(), new EmeraldShovel(), new EmeraldHoe(), new EmeraldDoubleAxe(), new EmeraldSickle(), new EmeraldChisel(), new ObsidianSword(), new ObsidianAxe(), new ObsidianPickaxe(), new ObsidianShovel(), new ObsidianHoe(), new ObsidianDoubleAxe(), new ObsidianSickle(), new ObsidianChisel(), new EndStoneSword(), new EndStoneAxe(), new EndStonePickaxe(), new EndStoneShovel(), new EndStoneHoe(), new EndStoneDoubleAxe(), new EndStoneSickle(), new EndStoneChisel(), new NetherrackSword(), new NetherrackAxe(), new NetherrackPickaxe(), new NetherrackShovel(), new NetherrackHoe(), new NetherrackDoubleAxe(), new NetherrackSickle(), new NetherrackChisel(), new CoalSword(), new CoalAxe(), new CoalPickaxe(), new CoalShovel(), new CoalHoe(), new CoalDoubleAxe(), new CoalSickle(), new CoalChisel(), new LapisSword(), new LapisAxe(), new LapisPickaxe(), new LapisShovel(), new LapisHoe(), new LapisDoubleAxe(), new LapisSickle(), new LapisChisel(), new RedstoneSword(), new RedstoneAxe(), new RedstonePickaxe(), new RedstoneShovel(), new RedstoneHoe(), new RedstoneDoubleAxe(), new RedstoneSickle(), new RedstoneChisel(), new PrismarineSword(), new PrismarineAxe(), new PrismarinePickaxe(), new PrismarineShovel(), new PrismarineHoe(), new PrismarineDoubleAxe(), new PrismarineSickle(), new PrismarineChisel(), new ClaySword(), new ClayAxe(), new ClayPickaxe(), new ClayShovel(), new ClayHoe(), new ClayDoubleAxe(), new ClaySickle(), new ClaySickle(), new SlimeSword(), new SlimeAxe(), new SlimePickaxe(), new SlimeShovel(), new SlimeHoe(), new SlimeDoubleAxe(), new SlimeSickle(), new SlimeChisel(), new StoneDoubleAxe(), new IronDoubleAxe(), new GoldDoubleAxe(), new DiamondDoubleAxe(), new StoneSickle(), new IronSickle(), new GoldSickle(), new DiamondSickle(), new StoneChisel(), new IronChisel(), new GoldChisel(), new DiamondChisel()).iterator();
-        while (iterator.hasNext()) {
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)iterator.next());
-        }
+        while (iterator.hasNext())
+            additionsAPIInitializationEvent.addCustomItem(iterator.next());
+
         ArmorType[] values;
         for (int length = (values = ArmorType.values()).length, i = 0; i < length; ++i) {
             ArmorType armorType = values[i];
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new EmeraldArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new ObsidianArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new StoneArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new EndStoneArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new NetherrackArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new CoalArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new LapisArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new RedstoneArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new PrismarineArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new ClayArmor(armorType));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new SlimeArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new EmeraldArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new ObsidianArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new StoneArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new EndStoneArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new NetherrackArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new CoalArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new LapisArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new RedstoneArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new PrismarineArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new ClayArmor(armorType));
+            additionsAPIInitializationEvent.addCustomItem(new SlimeArmor(armorType));
         }
+
         Iterator<String> iterator2 = Arrays.asList("oak;0;oak", "spruce;1;spruce", "birch;2;birch", "jungle;3;jungle", "acacia;4;acacia", "dark_oak;5;big_oak").iterator();
         while (iterator2.hasNext()) {
+
             String[] split = iterator2.next().split(";");
-            for (DamageableItem damageableItem : Arrays.asList(DamageableItem.WOODEN_SWORD, DamageableItem.WOODEN_AXE, DamageableItem.WOODEN_PICKAXE, DamageableItem.WOODEN_SHOVEL, DamageableItem.WOODEN_HOE)) {
-                additionsAPIInitializationEvent.addCustomItem((CustomItem)new WoodBasedItem(damageableItem, Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_" + damageableItem.getTextureName(), WordUtils.capitalize(String.valueOf(split[0].replaceAll("_", " ").toLowerCase()) + " " + damageableItem.toString().replaceAll("_", " ").toLowerCase())));
+            for (DamageableItem damageableItem : Arrays.asList(
+                    DamageableItem.WOODEN_SWORD,
+                    DamageableItem.WOODEN_AXE,
+                    DamageableItem.WOODEN_PICKAXE,
+                    DamageableItem.WOODEN_SHOVEL,
+                    DamageableItem.WOODEN_HOE)) {
+
+                additionsAPIInitializationEvent.addCustomItem(new WoodBasedItem(damageableItem, Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_" + damageableItem.getTextureName(), WordUtils.capitalize(String.valueOf(split[0].replaceAll("_", " ").toLowerCase()) + " " + damageableItem.toString().replaceAll("_", " ").toLowerCase())));
             }
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new WoodBasedDoubleAxe(Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_wood_double_axe", String.valueOf(WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase())) + " Wooden Double Axe"));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new WoodBasedSickle(Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_wood_sickle", String.valueOf(WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase())) + " Wooden Sickle"));
-            additionsAPIInitializationEvent.addCustomItem((CustomItem)new WoodBasedChisel(Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_wood_chisel", String.valueOf(WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase())) + " Wooden Chisel"));
+
+            additionsAPIInitializationEvent.addCustomItem(new WoodBasedDoubleAxe(Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_wood_double_axe", String.valueOf(WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase())) + " Wooden Double Axe"));
+            additionsAPIInitializationEvent.addCustomItem(new WoodBasedSickle(Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_wood_sickle", String.valueOf(WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase())) + " Wooden Sickle"));
+            additionsAPIInitializationEvent.addCustomItem(new WoodBasedChisel(Byte.parseByte(split[1]), split[0], String.valueOf(split[2]) + "_wood_chisel", String.valueOf(WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase())) + " Wooden Chisel"));
         }
-        additionsAPIInitializationEvent.addCustomItem((CustomItem)new EnderBow());
-        additionsAPIInitializationEvent.addCustomItem((CustomItem)new SlimeBucket());
+
+        additionsAPIInitializationEvent.addCustomItem(new EnderBow());
+        additionsAPIInitializationEvent.addCustomItem(new SlimeBucket());
         addCustomCraftingRecipes();
     }
     
@@ -202,9 +204,11 @@ public class Items implements Listener
             addHalfSlabCombo(Material.WOOD_STEP, 4, Material.WOOD, 4);
             addHalfSlabCombo(Material.WOOD_STEP, 5, Material.WOOD, 5);
         }
-        if (stringList.contains("CLAY_CONVERSION")) {
+
+        if (stringList.contains("CLAY_CONVERSION"))
             addSingleMaterialToItem(Material.CLAY, Material.CLAY_BALL, 4);
-        }
+
+
         if (stringList.contains("STAIRS_TO_BLOCKS")) {
             addFourMaterialsToItem(Material.WOOD_STAIRS, Material.WOOD, 2);
             addFourMaterialsToItem(Material.SPRUCE_WOOD_STAIRS, Material.WOOD, 1, 2);

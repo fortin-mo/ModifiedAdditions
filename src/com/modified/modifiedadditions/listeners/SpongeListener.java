@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.5.30
-// 
-
 package com.modified.modifiedadditions.listeners;
 
 import org.bukkit.event.EventHandler;
@@ -19,12 +15,12 @@ public class SpongeListener implements Listener
 {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent blockPlaceEvent) {
-        if (blockPlaceEvent.isCancelled()) {
+        if (blockPlaceEvent.isCancelled())
             return;
-        }
-        if (Items.config.getStringList("enabled-mechanics") == null) {
+
+        if (Items.config.getStringList("enabled-mechanics") == null)
             return;
-        }
+
         List stringList = Items.config.getStringList("enabled-mechanics");
         Block block = blockPlaceEvent.getBlock();
         Material type = block.getType();

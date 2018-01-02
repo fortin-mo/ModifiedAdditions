@@ -17,26 +17,26 @@ import org.bukkit.entity.Player;
 
 public interface DoubleAxeAbilities
 {
-    default void chopTree(final Player player, final Block block, final CustomItemStack cStack) {
+    default void chopTree(Player player,  Block block,  CustomItemStack cStack) {
         TreeFeller.chop(block, player, cStack);
     }
     
-    default void modifyCustomItem(final CustomTool cTool, final Material craftingMaterial) {
+    default void modifyCustomItem(CustomTool cTool,  Material craftingMaterial) {
         this.modifyCustomItem(cTool, new RecipeIngredient(craftingMaterial));
     }
     
-    default void modifyCustomItem(final CustomTool cTool, final RecipeIngredient craftingIngredient) {
+    default void modifyCustomItem(CustomTool cTool,  RecipeIngredient craftingIngredient) {
         cTool.getCustomRecipes().clear();
         cTool.addAttackSpeed((double)this.getAttackSpeed(cTool.getMaterial()));
         cTool.addAttackDamage((double)MaterialUtils.getBaseDamage(cTool.getMaterial()) + 0.75);
         cTool.addCustomRecipe((CustomRecipe)this.getRecipe(craftingIngredient, new RecipeIngredient(Material.STICK)));
     }
     
-    default float getAttackSpeed(final Material material) {
+    default float getAttackSpeed(Material material) {
         return MaterialUtils.getBaseSpeed(material) - 0.3f;
     }
     
-    default CustomShapedRecipe getRecipe(final RecipeIngredient craftingIngredient, final RecipeIngredient recipeIngredient) {
+    default CustomShapedRecipe getRecipe( RecipeIngredient craftingIngredient,  RecipeIngredient recipeIngredient) {
         return new CustomShapedRecipe().setShape("111", "121", "020").setIngredient('1', craftingIngredient).setIngredient('2', recipeIngredient);
     }
 }

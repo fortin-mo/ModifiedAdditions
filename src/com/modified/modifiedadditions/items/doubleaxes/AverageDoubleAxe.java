@@ -12,8 +12,8 @@ import com.modified.modifiedadditions.items.AverageTexturedTool;
 
 public class AverageDoubleAxe extends AverageTexturedTool implements DoubleAxeAbilities
 {
-    public AverageDoubleAxe(final DamageableItem damageableItem, final int n, final String s, final String s2, final String s3, final Material craftingMaterial) {
-        super(damageableItem, n, s, s2, s3);
-        this.modifyCustomItem((CustomTool)this, craftingMaterial);
+    public AverageDoubleAxe(DamageableItem damageableItem, int durability, String idName, String displayName, String defaultTexture, Material craftingMaterial) {
+        super(damageableItem, durability, idName, displayName, defaultTexture);
+        this.modifyCustomItem(this, craftingMaterial);
     }
 }

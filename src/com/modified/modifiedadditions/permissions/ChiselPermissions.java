@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.5.30
-// 
-
 package com.modified.modifiedadditions.permissions;
 
 import com.chrismin13.additionsapi.permissions.PermissionType;
