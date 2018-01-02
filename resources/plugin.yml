@@ -1,0 +1,5 @@
+name: ModifiedAdditions
+version: 1.2.2
+main: com.modified.modifiedadditions.ModifiedAdditions
+author: chrismin13
+depend: [ AdditionsAPI ]
