@@ -15,20 +15,22 @@ import org.bukkit.event.Listener;
 public class BlockBreakListener implements Listener
 {
     @EventHandler
-    public void onCustomItemBlockBreak(CustomItemBlockBreakEvent customItemBlockBreakEvent) {
-        if (customItemBlockBreakEvent.isCancelled()) {
+    public void onCustomItemBlockBreak(CustomItemBlockBreakEvent event) {
+        if (event.isCancelled())
             return;
-        }
-        CustomItem customItem = customItemBlockBreakEvent.getCustomItem();
-        CustomItemStack customItemStack = customItemBlockBreakEvent.getCustomItemStack();
-        BlockBreakEvent blockBreakEvent = customItemBlockBreakEvent.getBlockBreakEvent();
+
+        CustomItem customItem = event.getCustomItem();
+        CustomItemStack customItemStack = event.getCustomItemStack();
+        BlockBreakEvent blockBreakEvent = event.getBlockBreakEvent();
         Player player = blockBreakEvent.getPlayer();
         Block block = blockBreakEvent.getBlock();
-        if (customItem instanceof DoubleAxeAbilities && (block.getType().equals((Object)Material.LOG) || block.getType().equals((Object)Material.LOG_2))) {
+
+        if (customItem instanceof DoubleAxeAbilities
+                && (block.getType().equals(Material.LOG) || block.getType().equals(Material.LOG_2)))
             ((DoubleAxeAbilities)customItem).chopTree(player, block, customItemStack);
-        }
-        else if (customItem instanceof SickleAbilities) {
+
+        else if (customItem instanceof SickleAbilities)
             ((SickleAbilities)customItem).onUse(customItemStack, block, player);
-        }
+
     }
 }
